@@ -1,61 +1,67 @@
-# include <stdio.h>
-# include <string.h>
-# include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
+//65-90 A~Z 97-122a~z
+int main()
+{
+    char str[100001];
+    gets(str);
+    int len = strlen(str);
+    int lowercase[26] = {0};//小寫字母a~z的出現次數
+    int uppercase[26] = {0};//Ａ～Ｚ
 
-
-int main(){
-    char str[10000] = "", newstr[10000] = "", upperstr[10000] = "", lowerstr[10000] = "";
-    int i, j, len, count = 0, same = 0;
-    fgets(str, sizeof(str), stdin);
     
-    for (int i = 0; i < strlen(str); i++){
-        for (int j = 0; j < strlen(newstr); j++){
-            if (str[i] == newstr[j] || !isalpha(str[i])){
-                same = 1;
-                break;
-            }
+    for(int i = 0 ; i < len ; i++)
+    {
+        if(islower(str[i]))//小寫 計算小寫次數
+        {
+            int x = str[i];//A~Z65-90 uppercase[0]-25
+            lowercase[x-97]++;
+            
         }
-        if (same == 0){
-            newstr[count] = str[i];
-            count++;
-        }
-        else{
-            same = 0;
+        else if (isupper(str[i]))
+        {
+            int y = str[i];//A~Z65-90 uppercase[0]-25
+            uppercase[y-65]++;    
         }
     }
+    bool nolowercase = 1, nouppercase =1;
+    for( int i = 0 ; i < 26 ; i++)
+    {
+        if (lowercase[i] !=0)//出現小寫字母 
+        {
+            nolowercase =0 ;
+            break;
+        }
+    }
+    for( int i = 0 ; i < 26 ; i++)
+    {
+        if (uppercase[i] !=0)
+        {
+            nouppercase = 0;
+            break;
+        }
+    }
+    if(nouppercase )
+    printf("None");
+    else{
+    for(int i = 0 ; i < 26 ; i++)
+    {
+        if(uppercase[i] != 0)
+        printf("%c" , i+65);
+    }
+    }
+    printf("\n");
     
-    int count_upper = 0, count_lower = 0;
-    for (int i = 0; i < strlen(newstr); i++){
-        if (isupper(newstr[i])){
-            upperstr[count_upper] = newstr[i];
-            count_upper++;
-        }
-        else if (islower(newstr[i])){
-            lowerstr[count_lower] = newstr[i];
-            count_lower++;
-        }
+    if(nolowercase )
+    printf("None");
+    else{
+    for(int i = 0 ; i < 26 ; i++)
+    {
+        if(lowercase[i] != 0)
+        printf("%c" , i+97);
     }
-
-    char temp;
-    for (int i = 0; i < strlen(upperstr) - 1; i++) {
-        for (int j = i + 1; j < strlen(upperstr); j++) {
-            if (upperstr[i] > upperstr[j]) {
-                temp = upperstr[i];
-                upperstr[i] = upperstr[j];
-                upperstr[j] = temp;
-            }
-        }
     }
-    for (int i = 0; i < strlen(lowerstr) - 1; i++) {
-        for (int j = i + 1; j < strlen(lowerstr); j++) {
-            if (lowerstr[i] > lowerstr[j]) {
-                temp = lowerstr[i];
-                lowerstr[i] = lowerstr[j];
-                lowerstr[j] = temp;
-            }
-        }
-    }
-    
-    printf("%s\n", upperstr);
-    printf("%s", lowerstr);
+    return 0;
 }
