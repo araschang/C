@@ -6,7 +6,7 @@
 int main()
 {
     char str[100001];
-    gets(str);
+    fgets(str, sizeof(str), stdin);
     int len = strlen(str);
     int lowercase[26] = {0};//小寫字母a~z的出現次數
     int uppercase[26] = {0};//Ａ～Ｚ
