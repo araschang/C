@@ -75,7 +75,6 @@ int main(){
             }
         }
         while (have_count == strlen(new_pattern)){
-            fflush(stdout);
             if (end - start < min_len){
                 min_start = start;
                 min_end = end;
