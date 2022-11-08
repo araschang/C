@@ -10,7 +10,6 @@ int main()
     int len = strlen(str);
     int lowercase[26] = {0};//小寫字母a~z的出現次數
     int uppercase[26] = {0};//Ａ～Ｚ
-
     
     for(int i = 0 ; i < len ; i++)
     {

@@ -2,9 +2,8 @@
 # include <string.h>
 # include <ctype.h>
 
-
 int main(){
-    char str[1000] = "", pattern[1000] = "";
+    char str[10000] = "", pattern[10000] = "";
     fgets(str, sizeof(str), stdin);
     fgets(pattern, sizeof(pattern), stdin);
 
@@ -93,7 +92,6 @@ int main(){
                     have_count++;
                 }
             }
-            
         }
     }
     if (min_len == 100000){
@@ -104,4 +102,5 @@ int main(){
             printf("%c", str[i]);
         }
     }
+    return 0;
 }

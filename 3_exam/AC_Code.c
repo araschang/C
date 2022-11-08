@@ -4,11 +4,8 @@
 #include <stdlib.h>
 char* findsubstri(char *str,char *pattern){
 //此function為求出在str中包含pattern的最短子字串
-   
-
     int i, j, len, count = 0, same = 0;
     // 找不重複的pattern
-    
     char new_pattern[strlen(pattern)];
     for (int i = 0; i < strlen(pattern); i++){
         new_pattern[i] = '\0';
@@ -91,7 +88,6 @@ char* findsubstri(char *str,char *pattern){
                     have_count++;
                 }
             }
-            
         }
     }
     static  char substr[10001];//函數要反還的字串,加上static,不然return會出問題
@@ -106,8 +102,7 @@ char* findsubstri(char *str,char *pattern){
 }
 
 char* find_unique_letter(char *str){
-    char newstr[10000] = "";
-    static char upperstr[10000] = "", lowerstr[10000] = "";
+    static char newstr[10000] = "";
     int i, j, len, count = 0, same = 0;
     
     for (int i = 0; i < strlen(str); i++){
@@ -125,50 +120,17 @@ char* find_unique_letter(char *str){
             same = 0;
         }
     }
-    
-    int count_upper = 0, count_lower = 0;
-    for (int i = 0; i < strlen(newstr); i++){
-        if (isupper(newstr[i])){
-            upperstr[count_upper] = newstr[i];
-            count_upper++;
-        }
-        else if (islower(newstr[i])){
-            lowerstr[count_lower] = newstr[i];
-            count_lower++;
-        }
-    }
-
     char temp;
-    for (int i = 0; i < strlen(upperstr) - 1; i++) {
-        for (int j = i + 1; j < strlen(upperstr); j++) {
-            if (upperstr[i] > upperstr[j]) {
-                temp = upperstr[i];
-                upperstr[i] = upperstr[j];
-                upperstr[j] = temp;
+    for (int i = 0; i < strlen(newstr) - 1; i++) {
+        for (int j = i + 1; j < strlen(newstr); j++) {
+            if (newstr[i] > newstr[j]) {
+                temp = newstr[i];
+                newstr[i] = newstr[j];
+                newstr[j] = temp;
             }
         }
     }
-    for (int i = 0; i < strlen(lowerstr) - 1; i++) {
-        for (int j = i + 1; j < strlen(lowerstr); j++) {
-            if (lowerstr[i] > lowerstr[j]) {
-                temp = lowerstr[i];
-                lowerstr[i] = lowerstr[j];
-                lowerstr[j] = temp;
-            }
-        }
-    }
-    static char unique[20000] = "";
-    int count_unique = 0;
-    for (int i = 0; i < strlen(upperstr); i++){
-        unique[count_unique] = upperstr[i];
-        count_unique++;
-    }
-    for (int i = 0; i < strlen(lowerstr); i++){
-        unique[count_unique] = lowerstr[i];
-        count_unique++;
-    }
-    
-    return unique;
+    return newstr;
 }
 
 int main()
